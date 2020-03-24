@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  webpacker:
+    build: .
+    environment:
+      - NODE_ENV=development
+      - RAILS_ENV=development
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+    command: ./bin/webpack-dev-server
+    volumes:
+      - .:/app
+    ports:
+      - '3035:3035'
+
+  web:
+    build: .
+    command: ./bin/rails s -b 0.0.0.0
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=webpacker
+
+  redis:
+    image: redis
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: funapp-dev
