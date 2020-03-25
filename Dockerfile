@@ -21,6 +21,10 @@ ENV BUNDLE_PATH /gems
 RUN gem install bundler:2.1.4 && \
       bundle install
 
+COPY package.json .
+COPY yarn.lock .
+RUN yarn
+
 COPY . /app
 
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]

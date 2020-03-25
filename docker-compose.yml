@@ -11,6 +11,7 @@ services:
     volumes:
       - .:/app
       - gem_cache:/gems
+      - yarn_cache:/app/node_modules
     ports:
       - '3035:3035'
 
@@ -22,6 +23,7 @@ services:
     volumes:
       - .:/app
       - gem_cache:/gems
+      - yarn_cache:/app/node_modules
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpacker
 
@@ -37,3 +39,4 @@ services:
 
 volumes:
   gem_cache:
+  yarn_cache:
