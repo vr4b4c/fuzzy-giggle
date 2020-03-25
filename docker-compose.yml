@@ -10,6 +10,7 @@ services:
     command: ./bin/webpack-dev-server
     volumes:
       - .:/app
+      - gem_cache:/gems
     ports:
       - '3035:3035'
 
@@ -20,6 +21,7 @@ services:
       - 3000:3000
     volumes:
       - .:/app
+      - gem_cache:/gems
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpacker
 
@@ -32,3 +34,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: funapp-dev
+
+volumes:
+  gem_cache:

@@ -17,6 +17,7 @@ COPY Gemfile* /app/
 
 WORKDIR /app
 
+ENV BUNDLE_PATH /gems
 RUN gem install bundler:2.1.4 && \
       bundle install
 
