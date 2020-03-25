@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - docker-compose build
+      - docker-compose up
+  build:
+    commands:
+      - docker-compose run --rm web bundle exec rake db:prepare
+      - docker-compose run --rm web bundle exec rspec
