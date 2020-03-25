@@ -26,9 +26,9 @@ services:
       - yarn_cache:/app/node_modules
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpacker
-
-  redis:
-    image: redis
+    depends_on:
+      - db
+      - webpacker
 
   db:
     image: postgres
