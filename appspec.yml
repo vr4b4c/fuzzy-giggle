@@ -6,23 +6,14 @@ files:
 
 hooks:
   BeforeInstall:
-    - location: bundle install
-      timeout: 300
-      runas: ubuntu
-    - location: ln -s ../shared/config/master.key config/master.key
-      timeout: 300
-      runas: ubuntu
-    - location: RAILS_ENV=production bundle exec rake db:migrate
-      timeout: 300
-      runas: ubuntu
-    - location: RAILS_ENV=production bin/rake assets:precompile
+    - location: scripts/before-install.sh
       timeout: 300
       runas: ubuntu
   ApplicationStart:
-    - location: RAILS_ENV=production rails s -p 80 -d
+    - location: scripts/application-start.sh
       timeout: 300
       runas: ubuntu
   ApplicationStop:
-    - location: kill -SIGINT $(cat tmp/pids/server.pid)
+    - location: scripts/application-stop.sh
       timeout: 300
       runas: ubuntu
