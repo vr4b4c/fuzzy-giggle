@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: fun_production
-  username: fun
-  password: <%= ENV['FUN_DATABASE_PASSWORD'] %>
+  host: pozega.infinum.co
+  database: <%= Rails.application.credentials.database_name %>
+  username: <%= Rails.application.credentials.database_user %>
+  password: <%= Rails.application.credentials.database_password %>
