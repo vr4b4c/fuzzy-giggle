@@ -1,0 +1,28 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/www/code-deploy-test/current
+
+hooks:
+  BeforeInstall:
+    - location: bundle install
+      timeout: 300
+      runas: ubuntu
+    - location: ln -s ../shared/config/master.key config/master.key
+      timeout: 300
+      runas: ubuntu
+    - location: RAILS_ENV=production bundle exec rake db:migrate
+      timeout: 300
+      runas: ubuntu
+    - location: RAILS_ENV=production bin/rake assets:precompile
+      timeout: 300
+      runas: ubuntu
+  ApplicationStart:
+    - location: RAILS_ENV=production rails s -p 80 -d
+      timeout: 300
+      runas: ubuntu
+  ApplicationStop:
+    - location: kill -SIGINT $(cat tmp/pids/server.pid)
+      timeout: 300
+      runas: ubuntu
