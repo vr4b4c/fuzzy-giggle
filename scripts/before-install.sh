@@ -11,6 +11,8 @@ cd /opt/codedeploy-agent/deployment-root/$DEPLOYMENT_GROUP_ID/$DEPLOYMENT_ID/dep
 
 bundle install
 
+sudo chown -R ubuntu:ubuntu .
+
 ln -nfs $HOME/www/code-deploy-test/shared/config/master.key config/master.key
 
 bundle exec rake db:migrate
