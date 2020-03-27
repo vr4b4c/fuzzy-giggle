@@ -7,11 +7,11 @@ eval "$(rbenv init -)"
 
 export RAILS_ENV=production
 
-rbenv shell 2.6.1
+cd /opt/codedeploy-agent/deployment-root/$DEPLOYMENT_GROUP_ID/$DEPLOYMENT_ID/deployment-archive
 
 bundle install
 
-ln -s $HOME/www/code-deploy-test/shared/config/master.key config/master.key
+ln -nfs $HOME/www/code-deploy-test/shared/config/master.key config/master.key
 
 bundle exec rake db:migrate
 bundle exec rake assets:precompile
