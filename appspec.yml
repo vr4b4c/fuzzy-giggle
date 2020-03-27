@@ -3,6 +3,19 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/www/code-deploy-test/current
+permissions:
+  - object: /home/ubuntu/www/code-deploy-test/current
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+    type:
+      - file
+  - object: /home/ubuntu/www/code-deploy-test/current
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+    type:
+      - directory
 
 hooks:
   BeforeInstall:
