@@ -2,4 +2,8 @@
 
 set -ex
 
-kill -SIGINT `cat tmp/pids/server.pid`
+PIDFILE=tmp/pids/server.pid
+
+if [ -f "$PIDFILE" ]; then
+  kill -SIGINT `cat $PIDFILE`
+fi
